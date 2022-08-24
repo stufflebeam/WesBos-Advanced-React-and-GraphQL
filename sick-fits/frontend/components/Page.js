@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import Header from './Header';
 
 export default function Page({ children }) {
   const styleObj = {
@@ -8,24 +9,8 @@ export default function Page({ children }) {
   };
   return (
     <div>
+      <Header />
       <h2>I am the Page component! LFG!</h2>
-      <ul style={styleObj}>
-        <li style={styleObj}>
-          <a href="/">Index</a>
-        </li>
-        <li style={styleObj}>
-          <a href="/account">Account</a>
-        </li>
-        <li style={styleObj}>
-          <a href="/orders">Orders</a>
-        </li>
-        <li style={styleObj}>
-          <a href="/products">Products</a>
-        </li>
-        <li style={styleObj}>
-          <a href="/sell">Sell</a>
-        </li>
-      </ul>
       {children}
     </div>
   );
