@@ -1,6 +1,8 @@
+import Page from '../components/Page';
+
 export default function ProductsPage() {
   return (
-    <div
+    <Page
       style={{
         background: '#000',
         color: 'lightgreen',
@@ -15,6 +17,6 @@ export default function ProductsPage() {
     >
       <h1>Products</h1>
       <p>All the things...</p>
-    </div>
+    </Page>
   );
 }

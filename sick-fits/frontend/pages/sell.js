@@ -1,6 +1,8 @@
+import Page from '../components/Page';
+
 export default function SellPage() {
   return (
-    <div
+    <Page
       style={{
         background: '#000',
         color: 'goldenrod',
@@ -15,6 +17,6 @@ export default function SellPage() {
     >
       <h1>Sell the World</h1>
       <p>SELL! SELL! SELL!</p>
-    </div>
+    </Page>
   );
 }

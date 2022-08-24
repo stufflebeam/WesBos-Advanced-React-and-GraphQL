@@ -1,6 +1,8 @@
+import Page from '../components/Page';
+
 export default function IndexPage() {
   return (
-    <div
+    <Page
       style={{
         background: '#000',
         color: 'thistle',
@@ -15,6 +17,6 @@ export default function IndexPage() {
     >
       <h1>Hello World</h1>
       <p>This is a simple example of a React component.</p>
-    </div>
+    </Page>
   );
 }

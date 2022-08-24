@@ -1,6 +1,8 @@
+import Page from '../components/Page';
+
 export default function AccountPage() {
   return (
-    <div
+    <Page
       style={{
         background: '#000',
         color: 'orange',
@@ -15,6 +17,6 @@ export default function AccountPage() {
     >
       <h1>Account</h1>
       <p>Manage your account</p>
-    </div>
+    </Page>
   );
 }
