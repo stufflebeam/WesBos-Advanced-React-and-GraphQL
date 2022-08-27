@@ -1,5 +1,33 @@
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/client';
 import useForm from '../lib/useForm';
 import Form from './styles/Form';
+import DisplayError from './ErrorMessage';
+
+const CREATE_PRODUCT_MUTATION = gql`
+  mutation CREATE_PRODUCT_MUTATION(
+    # which variables we want to pass to the mutation
+    $name: String!
+    $description: String!
+    $price: Int!
+    $image: Upload
+  ) {
+    createProduct(
+      data: {
+        name: $name
+        description: $description
+        price: $price
+        photo: { create: { image: $image, altText: $name } }
+        status: "AVAILABLE"
+      }
+    ) {
+      id
+      name
+      price
+      description
+    }
+  }
+`;
 
 export default function CreateProduct() {
   //   const placeholder =
@@ -12,18 +40,35 @@ export default function CreateProduct() {
     image: '',
   });
 
+  const [createProduct, { loading, error, data }] = useMutation(
+    CREATE_PRODUCT_MUTATION,
+    {
+      variables: inputs,
+    }
+  );
+
   return (
     <Form
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
         console.log(inputs);
-        resetForm();
+        try {
+          // submit the inputs to the backend
+          const res = await createProduct();
+          console.log('res: ', res);
+          resetForm();
+        } catch (error) {
+          console.error('[CreateProduct] submission error: ', error);
+        }
       }}
     >
-      <fieldset>
+      <DisplayError error={error} />
+      <fieldset disabled={loading} aria-busy={loading}>
         <label htmlFor="image">
           Image:
           {/* TODO: Fix the reset of this form element on submit -- it currently retains the submitted value */}
+          {/*       Refer to this post for an idea of how to handle this: */}
+          {/*       https://thewebdev.info/2021/05/29/how-to-reset-a-file-inputs-value-in-react/ */}
           <input required type="file" name="image" onChange={handleChange} />
         </label>
         <label htmlFor="name">
