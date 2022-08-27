@@ -11,11 +11,22 @@ import { ProductImage } from './schemas/ProductImage';
 import { insertSeedData } from './seed-data';
 
 const databaseURL =
-  process.env.DATABASE_URL || 'mongodb://localhost/keystone-sick-fits-tutorial';
+  process.env.DATABASE_URL || process.env.SICKFITS_DATABASE_URL || 'mongodb://localhost/keystone-sick-fits-tutorial';
+
+// console.log('[keystone] (codespace) databaseURL: ', databaseURL);
+// console.log('[keystone] (codespace) process.env: ', process.env);
+// throw new Error('[keystone] exiting for testing...');
+
+// TODO: set up a better, and fully-centralized, way to switch between local, codespace, and production
+//       environments. This is a temporary hack to get the app to work in codespace development.
+//       The way I am currently imagining it is setting up something like a switch statement or a chain
+//       of if statements to determine the environment. When doing development in the codespace, a few of
+//       the environment variables' names need to be prepended with SICKFITS_
+//       (e.g. SICKFITS_DATABASE_URL, SICKFITS_COOKIE_SECRET, SICKFITS_FRONTEND_URL, etc.)
 
 const sessionConfig = {
   maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year
-  secret: process.env.COOKIE_SECRET,
+  secret: process.env.COOKIE_SECRET || process.env.SICKFITS_COOKIE_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: {
@@ -37,7 +48,7 @@ export default withAuth(
   config({
     server: {
       cors: {
-        origin: [process.env.FRONTEND_URL],
+        origin: [process.env.FRONTEND_URL || process.env.SICKFITS_FRONTEND_URL],
         credentials: true,
       },
     },
