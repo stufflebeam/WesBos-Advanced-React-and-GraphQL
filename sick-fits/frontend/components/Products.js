@@ -6,6 +6,7 @@ import gql from 'graphql-tag';
 // unsure what's going on here. :(
 import { useQuery } from '@apollo/client';
 import ReactLoading from 'react-loading';
+import LoadingAnimation from './LoadingAnimation';
 
 const ALL_PRODUCTS_QUERY = gql`
   query ALL_PRODUCTS_QUERY {
@@ -31,25 +32,7 @@ export default function Products() {
   console.log('[Products]: error:', error);
   console.log('[Products]: loading:', loading);
 
-  // Loading animation config -- TODO: standardize this across all components
-  const loadingConfig = {
-    type: 'bubbles',
-    color: '#000',
-    delay: 0,
-    height: 64,
-    width: 64,
-    className: 'loading-animation',
-  };
-  if (loading)
-    return (
-      <ReactLoading
-        type={loadingConfig.type}
-        color={loadingConfig.color}
-        height={loadingConfig.height}
-        width={loadingConfig.width}
-        className={loadingConfig.className}
-      />
-    );
+  if (loading) return <LoadingAnimation config={{ color: '#FF0000' }} />;
   if (error) return <p>Error: {error.message}</p>;
   return (
     <div>
