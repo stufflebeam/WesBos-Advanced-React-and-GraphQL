@@ -1,4 +1,5 @@
 import useForm from '../lib/useForm';
+import Form from './styles/Form';
 
 export default function CreateProduct() {
   const placeholder =
@@ -12,7 +13,7 @@ export default function CreateProduct() {
   });
 
   return (
-    <form>
+    <Form>
       <label>
         Name:
         <input
@@ -50,6 +51,6 @@ export default function CreateProduct() {
       <button type="button" onClick={resetForm}>
         reset
       </button>
-    </form>
+    </Form>
   );
 }
