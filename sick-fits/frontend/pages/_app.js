@@ -16,14 +16,7 @@ function MyApp({ Component, pageProps, apollo }) {
   console.log('[_app]: apollo:', apollo);
   return (
     <div>
-      {/* <Head>
-        <title>My App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head> */}
-      <header>
-        {/* <Nav /> */} <div>This is a header...</div>
-      </header>
-      <ApolloProvider client={apollo} >
+      <ApolloProvider client={apollo}>
         <Page>
           <Component {...pageProps} />
         </Page>
@@ -42,7 +35,7 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
   }
   pageProps.query = ctx.query;
   return { pageProps };
-}
+};
 
 MyApp.propTypes = {
   Component: PropTypes.any,
