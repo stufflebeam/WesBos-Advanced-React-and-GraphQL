@@ -32,6 +32,9 @@ const ItemStyles = styled.div`
       font-size: 1rem;
       padding: 1rem;
     }
+    .fa-icon {
+      margin: 0 0.5rem;
+    }
   }
 `;
 

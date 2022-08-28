@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPencil } from '@fortawesome/free-solid-svg-icons';
+import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 import formatMoney from '../lib/formatMoney';
 import ItemStyles from './styles/ItemStyles';
 import PriceTag from './styles/PriceTag';
 import Title from './styles/Title';
+import DeleteProduct from './DeleteProduct';
 
 // This is one example of a placeholder image that can be used when a product
 // doesn't have a photo.
@@ -45,7 +46,7 @@ export default function Product({ product }) {
       </Title>
       <PriceTag>{formatMoney(product.price)}</PriceTag>
       <p>{product.description}</p>
-      <div className="buttonlist">
+      <div className="buttonList">
         {/* <Link href={`/product/${product.id}`}>
           <a>View Product</a>
         </Link> */}
@@ -56,13 +57,14 @@ export default function Product({ product }) {
           }}
         >
           {/* Have to wrap in an anchor tag because Link expects a single chile */}
-          <a>
-            Edit <FontAwesomeIcon icon={faPencil} />
-          </a>
+          <button type="button">
+            {/* TODO: Add custom styling to these Font Awesome icons to give them a bit of margin */}
+            Edit <FontAwesomeIcon icon={faPencil} className="fa-icon" />
+          </button>
         </Link>
-        {/* <Link href={`/product/${product.id}/delete`}>
-          <a>Delete Product</a>
-        </Link> */}
+        <DeleteProduct id={product.id}>
+          Delete <FontAwesomeIcon icon={faTrash} className="fa-icon" />
+        </DeleteProduct>
       </div>
     </ItemStyles>
   );
