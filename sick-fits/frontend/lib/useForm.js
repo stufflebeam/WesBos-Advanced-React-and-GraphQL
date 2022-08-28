@@ -1,8 +1,25 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function useForm(initial = {}) {
   // create a state object for our form inputs
   const [inputs, setInputs] = useState(initial);
+  // const initialValues = Object.values(initial).join('');
+  // This 'feels' better than the suggested solution (above), as it avoids useEffect()
+  // being called due to object property order not being guaranteed.
+  // This way, it only gets called when the form is first populated with fetched data
+  // and the values go from '' to something else.
+  const initialValuesEmpty = Object.values(initial).join('') === '';
+  // console.log('[useForm] initialValuesEmpty: ', initialValuesEmpty);
+
+  useEffect(() => {
+    // This function runs when the things we are watching change
+    // console.log(
+    //   '[useForm] useEffect() initialValuesEmpty: ',
+    //   initialValuesEmpty
+    // );
+    setInputs(initial);
+  }, [initialValuesEmpty]);
+
   // create a function that updates the state object
   const handleChange = (e) => {
     let { value, name, type } = e.target;

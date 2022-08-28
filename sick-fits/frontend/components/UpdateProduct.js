@@ -73,13 +73,17 @@ export default function UpdateProduct({ id }) {
   });
   //   console.log('[UpdateProduct] ', { updateData, updateLoading, updateError });
 
-  if (loading) return <LoadingAnimation config={{ color: '#FF0000' }} />;
+  // The last bit here ensures that the form fields are controlled on first render
+  // See this Slack thread for more info: https://wesbos.slack.com/archives/C9G96G2UB/p1612997378318500
+  if (loading || updateLoading || Object.values(inputs).join('') === '')
+    return <LoadingAnimation config={{ color: '#FF0000' }} />;
   //   if (error) return <p>Error: {error.message}</p>;
-  if (error) return <DisplayError error={error} />;
+  if (error || updateError)
+    return <DisplayError error={error || updateError} />;
 
-  if (updateLoading) return <LoadingAnimation config={{ color: '#FF0000' }} />;
-  //   if (updateError) return <p>Error: {updateError.message}</p>;
-  if (updateError) return <DisplayError error={updateError} />;
+  //   if (updateLoading) return <LoadingAnimation config={{ color: '#FF0000' }} />;
+  //   //   if (updateError) return <p>Error: {updateError.message}</p>;
+  //   if (updateError) return <DisplayError error={updateError} />;
 
   return (
     <Form
