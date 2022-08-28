@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPencil } from '@fortawesome/free-solid-svg-icons';
 import formatMoney from '../lib/formatMoney';
 import ItemStyles from './styles/ItemStyles';
 import PriceTag from './styles/PriceTag';
@@ -43,7 +45,25 @@ export default function Product({ product }) {
       </Title>
       <PriceTag>{formatMoney(product.price)}</PriceTag>
       <p>{product.description}</p>
-      {/* TODO: Add buttons to edit and delete items */}
+      <div className="buttonlist">
+        {/* <Link href={`/product/${product.id}`}>
+          <a>View Product</a>
+        </Link> */}
+        <Link
+          href={{
+            pathname: '/update',
+            query: { id: product.id },
+          }}
+        >
+          {/* Have to wrap in an anchor tag because Link expects a single chile */}
+          <a>
+            Edit <FontAwesomeIcon icon={faPencil} />
+          </a>
+        </Link>
+        {/* <Link href={`/product/${product.id}/delete`}>
+          <a>Delete Product</a>
+        </Link> */}
+      </div>
     </ItemStyles>
   );
 }

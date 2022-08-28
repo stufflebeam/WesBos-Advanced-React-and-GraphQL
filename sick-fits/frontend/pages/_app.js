@@ -2,11 +2,15 @@ import PropTypes from 'prop-types';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import { ApolloProvider } from '@apollo/client';
+import { config } from '@fortawesome/fontawesome-svg-core';
+import '@fortawesome/fontawesome-svg-core/styles.css';
 import Page from '../components/Page';
 
 // import 'nprogress/nprogress.css'; // Official NProgress progress bar style
 import '../components/styles/nprogress.css'; // Our own custom NProgress progress bar style
 import withData from '../lib/withData';
+
+config.autoAddCss = false;
 
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());

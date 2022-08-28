@@ -17,6 +17,7 @@ export default function useForm(initial = {}) {
       [value] = e.target.files;
     }
 
+    // console.log('[handleChange]', { value, name, type });
     setInputs({
       // copy the existing state first
       ...inputs,
