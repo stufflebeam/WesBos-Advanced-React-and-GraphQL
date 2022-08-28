@@ -67,7 +67,11 @@ export default function CreateProduct() {
           Router.push({
             // could also use the data object we destrctured from the
             // useMutation hook above to get the id of the new product
-            pathname: `/products/${res.data.createProduct.id}`,
+            pathname: `/product/${res.data.createProduct.id}`,
+            // TODO: Consider creating a custom slug for each product
+            //       when it is added to the database, and then using
+            //       that slug instead of the product id in the link
+            //       to the product page. (Next.js supports this)
           });
         } catch (error) {
           console.error('[CreateProduct] submission error: ', error);
