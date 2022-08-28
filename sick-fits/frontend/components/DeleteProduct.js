@@ -23,13 +23,32 @@ const DELETE_PRODUCT_MUTATION = gql`
   }
 `;
 
+function update(cache, payload) {
+  // The following is the code suggested by Github Copilot when I opened up this function.
+  // It is very different from what we are writing here, but I'm interested to see if it works,
+  // and to understand how it works if it does. So, I'm leaving it here for now.
+  // const data = cache.readQuery({ query: ALL_PRODUCTS_QUERY });
+  // data.products = data.products.filter(product => product.id !== payload.data.deleteProduct.id);
+  // cache.writeQuery({ query: ALL_PRODUCTS_QUERY, data });
+  // --------------------------------------------------------------------------------------------
+  // The following is the code we are writing.
+  cache.evict(cache.identify(payload.data.deleteProduct));
+  console.log(
+    '[DeleteProduct] product evicted from cache',
+    payload.data.deleteProduct
+  );
+}
+
 export default function DeleteProduct({ id, children }) {
   // Delete product mutation and refetch query
   const [deleteProduct, { data, error, loading }] = useMutation(
     DELETE_PRODUCT_MUTATION,
     {
       variables: { id },
-      refetchQueries: [{ query: ALL_PRODUCTS_QUERY, variables: { id } }],
+      //   switching to evict the deleted item from cache once the mutation is complete
+      //   instead of going back to the network to get the updated list of products
+      //   refetchQueries: [{ query: ALL_PRODUCTS_QUERY, variables: { id } }],
+      update,
     }
   );
   console.log('[DeleteProduct] ', { data, loading, error });
