@@ -33,10 +33,10 @@ function update(cache, payload) {
   // --------------------------------------------------------------------------------------------
   // The following is the code we are writing.
   cache.evict(cache.identify(payload.data.deleteProduct));
-  console.log(
-    '[DeleteProduct] product evicted from cache',
-    payload.data.deleteProduct
-  );
+  // console.log(
+  //   '[DeleteProduct] product evicted from cache',
+  //   payload.data.deleteProduct
+  // );
 }
 
 export default function DeleteProduct({ id, children }) {
@@ -51,7 +51,7 @@ export default function DeleteProduct({ id, children }) {
       update,
     }
   );
-  console.log('[DeleteProduct] ', { data, loading, error });
+  // console.log('[DeleteProduct] ', { data, loading, error });
 
   if (loading) return <LoadingAnimation config={{ color: '#FF0000' }} />;
   //   if (error) return <p>Error: {error.message}</p>;

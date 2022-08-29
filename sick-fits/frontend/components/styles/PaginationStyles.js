@@ -22,6 +22,9 @@ const PaginationStyles = styled.div`
     color: grey;
     pointer-events: none;
   }
+  .fa-icon {
+    margin: 0 0.5rem;
+  }
 `;
 
 export default PaginationStyles;
