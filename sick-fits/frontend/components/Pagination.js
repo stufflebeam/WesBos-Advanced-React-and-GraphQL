@@ -24,7 +24,7 @@ export default function Pagination({ page }) {
   const { error, loading, data } = useQuery(PAGINATION_QUERY);
   if (loading) return <LoadingAnimation config={{ color: '#FF0000' }} />;
   if (error) return <DisplayError error={error} />;
-  console.log('[Pagination]: data:', data);
+  // console.log('[Pagination]: data:', data);
   const { count } = data._allProductsMeta;
   const pageCount = Math.ceil(count / perPage);
 
@@ -35,6 +35,18 @@ export default function Pagination({ page }) {
           Sick Fits - Page {page} of {pageCount}
         </title>
       </Head>
+      {console.log(
+        '[Pagination]: (before prev) page:',
+        page,
+        'typeof page:',
+        typeof page,
+        'page + 1 = ',
+        page + 1,
+        'pageCount:',
+        pageCount,
+        'count:',
+        count
+      )}
       <Link href={`/products/${page - 1}`}>
         <a aria-disabled={page <= 1}>
           <FontAwesomeIcon icon={faLongArrowAltLeft} className="fa-icon" />
@@ -45,6 +57,18 @@ export default function Pagination({ page }) {
         Page {page} of {pageCount}
       </p>
       <p>{count} Items Total</p>
+      {console.log(
+        '[Pagination]: (before next) page:',
+        page,
+        'typeof page:',
+        typeof page,
+        'page + 1 = ',
+        page + 1,
+        'pageCount:',
+        pageCount,
+        'count:',
+        count
+      )}
       <Link href={`/products/${page + 1}`}>
         <a aria-disabled={page >= pageCount}>
           Next
