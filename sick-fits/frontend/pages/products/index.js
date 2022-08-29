@@ -4,12 +4,12 @@ import Products from '../../components/Products';
 
 export default function ProductsPage() {
   const { query } = useRouter();
-
+  const currentPage = parseInt(query.page) || 1;
   return (
     <div>
-      <Pagination page={parseInt(query.page) || 1} />
-      <Products />
-      <Pagination page={parseInt(query.page) || 1} />
+      <Pagination page={currentPage} />
+      <Products page={currentPage} />
+      <Pagination page={currentPage} />
     </div>
   );
 }
