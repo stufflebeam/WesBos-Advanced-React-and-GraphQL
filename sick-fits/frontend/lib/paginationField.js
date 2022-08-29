@@ -12,13 +12,13 @@ export default function paginationField() {
       const count = data?._allProductsMeta?.count;
       const page = skip / first + 1; // Math.ceil(skip / first) + 1;
       const pageCount = Math.ceil(count / first);
-      console.log('[paginationField] read():', {
-        skip,
-        first,
-        count,
-        page,
-        pageCount,
-      });
+      // console.log('[paginationField] read():', {
+      //   skip,
+      //   first,
+      //   count,
+      //   page,
+      //   pageCount,
+      // });
 
       // Check to see if we have the requested items in the cache.
       const items = existing.slice(skip, skip + first).filter((x) => x); // TODO: Should this be .filter((x) => !!x);
@@ -48,9 +48,9 @@ export default function paginationField() {
 
       // If we have all the items, we can just return them.
       if (items.length) {
-        console.log(
-          `[paginationField]: There are ${items.length} items in the cache. Sending them to Apollo...`
-        );
+        // console.log(
+        //   `[paginationField]: There are ${items.length} items in the cache. Sending them to Apollo...`
+        // );
         return items;
       }
 
@@ -69,18 +69,18 @@ export default function paginationField() {
       // So, this is where we decide how we want to put the returned data into the cache.
       const { skip, first } = args;
 
-      console.log('[paginationField]: merging items from the network...]', {
-        existing,
-        incoming,
-        args,
-        cache,
-      });
+      // console.log('[paginationField]: merging items from the network...]', {
+      //   existing,
+      //   incoming,
+      //   args,
+      //   cache,
+      // });
       const merged = existing ? existing.slice(0) : [];
 
       for (let i = skip; i < skip + incoming.length; ++i) {
         merged[i] = incoming[i - skip];
       }
-      console.log('[paginationField] merge():', { merged });
+      // console.log('[paginationField] merge():', { merged });
 
       // return the merged items
       // at this point, Apollo will call the read() function again to see if it can return the
