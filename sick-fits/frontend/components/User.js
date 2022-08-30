@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 
+// TODO: query for permissions once we have those
 export const CURRENT_USER_QUERY = gql`
   query {
     authenticatedItem {
@@ -8,19 +9,22 @@ export const CURRENT_USER_QUERY = gql`
         id
         email
         name
-        # TODO: query for permissions and the cart once we have those
-        # permissions
-        # cart {
-        #   id
-        #   quantity
-        #   item {
-        #     id
-        #     price
-        #     image
-        #     title
-        #     description
-        #   }
-        # }
+        cart {
+          id
+          quantity
+          product {
+            id
+            name
+            price
+            description
+            photo {
+              altText
+              image {
+                publicUrlTransformed
+              }
+            }
+          }
+        }
       }
     }
   }
