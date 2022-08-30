@@ -69,18 +69,19 @@ export default function SignIn() {
     console.log('[SignIn] handleSubmit() res:', res);
     resetForm();
   }
+
+  const authError =
+    data?.authenticateUserWithPassword?.__typename ===
+    'UserAuthenticationWithPasswordFailure'
+      ? data?.authenticateUserWithPassword
+      : undefined;
+
   return (
     // Using method="post" to prevent the possibility of a user's password being passed as a query parameter
     // in the browser's address bar.
     <Form method="POST" onSubmit={handleSubmit}>
       <h2>Sign Into Your Account</h2>
-      <DisplayError
-        error={{
-          message: data?.authenticateUserWithPassword?.message
-            ? `${data?.authenticateUserWithPassword?.message} Please try again.`
-            : '',
-        }}
-      />
+      <DisplayError error={authError} />
       {/* {console.log(
         '[SignIn] data?.authenticateUserWithPassword?.message:',
         data?.authenticateUserWithPassword?.message
