@@ -1,3 +1,5 @@
+import SignIn from '../components/SignIn';
+
 export default function SignInPage() {
-  return <div>Sign in here! 🔑</div>;
+  return <SignIn />;
 }
