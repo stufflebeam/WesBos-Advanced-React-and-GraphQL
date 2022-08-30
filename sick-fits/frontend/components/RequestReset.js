@@ -34,7 +34,7 @@ export default function RequestReset() {
     }
   );
 
-  // As of the Octover 5, 2021 release of KeystoneJS, the sendUserPasswordResetLink
+  // As of the October 5, 2021 release of KeystoneJS, the sendUserPasswordResetLink
   // mutation no longer returns a code or message.
   // From what I can tell, this change was made for a similar reason as the reason
   // the team decided to remove the code from the UserAuthenticationWithPasswordFailure
