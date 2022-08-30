@@ -5,6 +5,11 @@ import { cloudinaryImage } from '@keystone-next/cloudinary';
 export const Product = list({
   // TODO add access
   // access:
+  ui: {
+    listView: {
+      initialColumns: ['name', 'price', 'status'],
+    },
+  },
   fields: {
     name: text({ isRequired: true }),
     description: text({
