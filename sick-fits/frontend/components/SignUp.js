@@ -89,7 +89,7 @@ export default function SignUp() {
             Please go ahead and Sign In!
           </AccountCreatedNotificationStyles>
         )} */}
-        <label htmlFor="email">
+        <label htmlFor="name">
           Your Name
           <input
             type="text"

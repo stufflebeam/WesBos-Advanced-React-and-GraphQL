@@ -11,7 +11,9 @@ import { ProductImage } from './schemas/ProductImage';
 import { insertSeedData } from './seed-data';
 
 const databaseURL =
-  process.env.DATABASE_URL || process.env.SICKFITS_DATABASE_URL || 'mongodb://localhost/keystone-sick-fits-tutorial';
+  process.env.DATABASE_URL ||
+  process.env.SICKFITS_DATABASE_URL ||
+  'mongodb://localhost/keystone-sick-fits-tutorial';
 
 // console.log('[keystone] (codespace) databaseURL: ', databaseURL);
 // console.log('[keystone] (codespace) process.env: ', process.env);
@@ -41,6 +43,11 @@ const { withAuth } = createAuth({
   initFirstItem: {
     fields: ['name', 'email', 'password'],
     // TODO: add initial roles here
+  },
+  passwordResetLink: {
+    async sendToken(args) {
+      console.log('[keystone] sending password reset link...', args);
+    },
   },
 });
 
