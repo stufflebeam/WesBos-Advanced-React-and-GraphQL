@@ -9,6 +9,7 @@ import Page from '../components/Page';
 // import 'nprogress/nprogress.css'; // Official NProgress progress bar style
 import '../components/styles/nprogress.css'; // Our own custom NProgress progress bar style
 import withData from '../lib/withData';
+import { CartStateProvider } from '../lib/cartState';
 
 config.autoAddCss = false;
 
@@ -21,9 +22,11 @@ function MyApp({ Component, pageProps, apollo }) {
   return (
     <div>
       <ApolloProvider client={apollo}>
-        <Page>
-          <Component {...pageProps} />
-        </Page>
+        <CartStateProvider>
+          <Page>
+            <Component {...pageProps} />
+          </Page>
+        </CartStateProvider>
       </ApolloProvider>
       <footer>
         <small>&copy; {new Date().getFullYear()}</small>

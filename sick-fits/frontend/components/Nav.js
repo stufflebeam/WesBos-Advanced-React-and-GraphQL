@@ -1,11 +1,18 @@
 import Link from 'next/link';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SignOut from './SignOut';
 import NavStyles from './styles/NavStyles';
 import { useUser, CURRENT_USER_QUERY } from './User';
+import { useCart } from '../lib/cartState';
 
 export default function Nav() {
   const user = useUser();
   console.log('[Nav] user:', user);
+
+  const cartState = useCart();
+  // console.log('[Nav] cartState', cartState);
+  const { cartOpen, cartItems, openCart, closeCart } = cartState;
 
   return (
     <NavStyles>
@@ -19,6 +26,9 @@ export default function Nav() {
           {/* <Link href="/cart">Cart</Link> */}
           {/* <Link href="/signout">Sign Out</Link> */}
           <SignOut />
+          <button type="button" onClick={openCart}>
+            <FontAwesomeIcon icon={faShoppingCart} className="fa-icon" />
+          </button>
         </>
       ) : (
         <Link href="/signin">Sign In</Link>
