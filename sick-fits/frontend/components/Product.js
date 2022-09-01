@@ -6,6 +6,7 @@ import ItemStyles from './styles/ItemStyles';
 import PriceTag from './styles/PriceTag';
 import Title from './styles/Title';
 import DeleteProduct from './DeleteProduct';
+import AddToCart from './AddToCart';
 
 // This is one example of a placeholder image that can be used when a product
 // doesn't have a photo.
@@ -65,6 +66,7 @@ export default function Product({ product }) {
         <DeleteProduct id={product.id}>
           Delete <FontAwesomeIcon icon={faTrash} className="fa-icon" />
         </DeleteProduct>
+        <AddToCart id={product.id} />
       </div>
     </ItemStyles>
   );

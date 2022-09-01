@@ -8,7 +8,7 @@ import { useCart } from '../lib/cartState';
 
 export default function Nav() {
   const user = useUser();
-  console.log('[Nav] user:', user);
+  // console.log('[Nav] user:', user);
 
   const cartState = useCart();
   // console.log('[Nav] cartState', cartState);

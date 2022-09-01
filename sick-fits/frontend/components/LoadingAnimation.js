@@ -1,4 +1,13 @@
 import ReactLoading from 'react-loading';
+import styled from 'styled-components';
+
+const LoadingAnimationStyles = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+`;
 
 // export default function LoadingAnimation() {
 const LoadingAnimation = (props) => {
@@ -13,13 +22,15 @@ const LoadingAnimation = (props) => {
     className: className || 'loading-animation',
   };
   return (
-    <ReactLoading
-      type={loadingConfig.type}
-      color={loadingConfig.color}
-      height={loadingConfig.height}
-      width={loadingConfig.width}
-      className={loadingConfig.className}
-    />
+    <LoadingAnimationStyles>
+      <ReactLoading
+        type={loadingConfig.type}
+        color={loadingConfig.color}
+        height={loadingConfig.height}
+        width={loadingConfig.width}
+        className={loadingConfig.className}
+      />
+    </LoadingAnimationStyles>
   );
 };
 

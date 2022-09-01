@@ -21,13 +21,13 @@ const CloseCartStyles = styled.span`
 
 export default function Cart() {
   const currentUser = useUser();
-  console.log('[Cart] currentUser', currentUser);
+  // console.log('[Cart] currentUser', currentUser);
   if (!currentUser) {
     return null;
   }
 
   const cartState = useCart();
-  console.log('[Cart] cartState', cartState);
+  // console.log('[Cart] cartState', cartState);
   const { cartOpen, cartItems, closeCart } = cartState;
 
   return (
