@@ -8,7 +8,7 @@ function CartStateProvider({ children }) {
   // We will store data (state) and functionality (updaters) here
   // and anyone can access this data and the updaters via the consumer
   //   const cartOpen = true;
-  const [cartOpen, setCartOpen] = useState(true);
+  const [cartOpen, setCartOpen] = useState(false);
 
   function toggleCart() {
     setCartOpen(!cartOpen);

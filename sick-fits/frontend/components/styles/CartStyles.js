@@ -6,7 +6,7 @@ const CartStyles = styled.div`
   background: white;
   position: fixed;
   height: 100%;
-  top: 0;
+  top: 150px; /* Changed this from 0 to 150px to allow the header to be seen when the cart is open */
   right: 0;
   width: 40%;
   min-width: 500px;
