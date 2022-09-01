@@ -36,6 +36,9 @@ const DELETE_FROM_CART_MUTATION = gql`
     }
   }
 `;
+function update(cache, payload) {
+  cache.evict(cache.identify(payload.data.deleteCartItem));
+}
 
 export default function DeleteFromCart({ id }) {
   // const cartState = useCart();
@@ -49,7 +52,18 @@ export default function DeleteFromCart({ id }) {
     {
       variables: { id },
       // refetch the currently logged in user to get the updated cart
-      refetchQueries: [{ query: CURRENT_USER_QUERY }],
+      // refetchQueries: [{ query: CURRENT_USER_QUERY }],
+      // Instead of going back to the network to refetch the user query, just evict the item from the cache
+      update,
+      // Having to comment this out for now, because it's currently causing an error
+      // This appears to be a bug in Keystone. So, just waiting for a fix before re-enabling this optimistic response.
+      // optimisticResponse: {
+      //   __typename: 'Mutation',
+      //   deleteCartItem: {
+      //     __typename: 'CartItem',
+      //     id,
+      //   },
+      // },
     }
   );
 
