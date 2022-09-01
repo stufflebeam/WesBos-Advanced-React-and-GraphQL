@@ -46,7 +46,7 @@ export default function DeleteFromCart({ id }) {
   // const { cartOpen, cartItems, openCart, closeCart } = cartState;
   // const { openCart } = cartState;
 
-  console.log('DeleteFromCart] id = ', id);
+  // console.log('DeleteFromCart] id = ', id);
   const [deleteFromCart, { data, loading, error }] = useMutation(
     DELETE_FROM_CART_MUTATION,
     {

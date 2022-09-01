@@ -16,13 +16,12 @@ const ADD_TO_CART_MUTATION = gql`
 `;
 
 export default function AddToCart({ id }) {
-  
   const cartState = useCart();
   // console.log('[AddToCart] cartState', cartState);
   // const { cartOpen, cartItems, openCart, closeCart } = cartState;
   const { openCart } = cartState;
 
-  console.log('[AddToCart] id = ', id);
+  // console.log('[AddToCart] id = ', id);
   const [addToCart, { data, loading, error }] = useMutation(
     ADD_TO_CART_MUTATION,
     {
@@ -52,7 +51,14 @@ export default function AddToCart({ id }) {
     //     addToCart({ variables: { id } }).catch((err) => console.error(err));
     //   }}
     // >
-    <button type="button" disabled={loading} onClick={() => {addToCart(); openCart(); }}>
+    <button
+      type="button"
+      disabled={loading}
+      onClick={() => {
+        addToCart();
+        openCart();
+      }}
+    >
       Add{loading && 'ing'} to Cart!{' '}
       <FontAwesomeIcon icon={faCartPlus} className="fa-icon" />
     </button>
