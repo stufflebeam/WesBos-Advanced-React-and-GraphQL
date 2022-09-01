@@ -1,7 +1,15 @@
 import styled from 'styled-components';
 import { loadStripe } from '@stripe/stripe-js';
-import { CardElement, Elements } from '@stripe/react-stripe-js';
+import {
+  CardElement,
+  Elements,
+  useElements,
+  useStripe,
+} from '@stripe/react-stripe-js';
+import { useState } from 'react';
+import nProgress from 'nprogress';
 import SickButton from './styles/SickButton';
+import DisplayError from './ErrorMessage';
 
 const CheckoutFormStyles = styled.form`
   box-shadow: 0 1px 2px 2px rgba(0, 0, 0, 0.04);
@@ -10,22 +18,71 @@ const CheckoutFormStyles = styled.form`
   padding: 1rem;
   display: grid;
   grid-gap: 1rem;
+
+  // This is styling for any error messages that show up inside the Stripe CardElement
+  // see the TODO in the ErrorMessage component for more info about the ideal way to
+  // eliminate the need for this sort of custom styling.
+  p[data-test='graphql-error'] {
+    font-size: 16px !important;
+  }
 `;
 
 const stripeLib = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
 
-export default function Checkout() {
-  function handleSubmit(e) {
+function CheckoutForm() {
+  const [error, setError] = useState();
+  const [loading, setLoading] = useState(false);
+  const stripe = useStripe();
+  const elements = useElements();
+
+  async function handleSubmit(e) {
+    // 1. Stop the form from submitting and turn the loader on
     e.preventDefault();
+    setLoading(true);
     console.log('We gotta do some work...');
+    // 2. Start the page transition
+    nProgress.start();
+    // 3. Create the payment method via Stripe (Token comes back here if successful)
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: 'card',
+      card: elements.getElement(CardElement),
+    });
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((err) => {
+    //     setError(err);
+    //   });
+    console.log('[Checkout]', { error, paymentMethod });
+    // 4. Handle any errors from Stripe
+    if (error) {
+      setError(error);
+      nProgress.done();
+      return; // stops the checkout from happening
+    }
+    // 5. Send the token from step 3 to our Keystone server, via a custom mutation!
+    // 6. Change the page to view the order
+    // 7. Close the cart (if the payment was successful)
+    // 8. Turn the loader off
+    setLoading(false);
+    nProgress.done();
   }
 
   return (
+    <CheckoutFormStyles onSubmit={handleSubmit}>
+      {error && <DisplayError error={error} />}
+      <CardElement />
+      <SickButton>Check Out Now</SickButton>
+    </CheckoutFormStyles>
+  );
+}
+
+function Checkout() {
+  return (
     <Elements stripe={stripeLib}>
-      <CheckoutFormStyles onSubmit={handleSubmit}>
-        <CardElement />
-        <SickButton>Check Out Now</SickButton>
-      </CheckoutFormStyles>
+      <CheckoutForm />
     </Elements>
   );
 }
+
+export { Checkout };

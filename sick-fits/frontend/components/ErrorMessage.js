@@ -18,6 +18,12 @@ const ErrorStyles = styled.div`
   }
 `;
 
+// TODO: Expand this component to accept additional props, such as custom styling/classes, etc.
+//       There are situations, like in the Stripe checkout flow, where I'd like to decrease
+//       the size of the error message, so that it better matches the size of the Stripe
+//       form elements. In this case, I'd like to either pass in custom style attributes
+//       or a custom class name, so that I can style the error message accordingly.
+
 const DisplayError = ({ error }) => {
   // console.log('[DisplayError] error:', error, error?.message);
   if (!error || !error.message) return null;
