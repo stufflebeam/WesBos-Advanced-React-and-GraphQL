@@ -6,7 +6,10 @@ const CartStyles = styled.div`
   background: white;
   position: fixed;
   height: 100%;
-  top: 150px; /* Changed this from 0 to 150px to allow the header to be seen when the cart is open */
+  /* Changed this from 0 to 150px to allow the header to be seen when the cart is open */
+  /* BUT then the footer of the cart is off-screen. So, if we want to support that, we'll
+     need to do some tweaking to the cart styles to make it work. Switching back to 0 for now. */
+  top: 0;
   right: 0;
   width: 40%;
   min-width: 500px;
@@ -27,8 +30,8 @@ const CartStyles = styled.div`
     border-top: 10px double var(--black);
     margin-top: 2rem;
     padding-top: 2rem;
-    display: grid;
-    grid-template-columns: auto auto;
+    /* display: grid;
+    grid-template-columns: auto auto; */
     align-items: center;
     font-size: 3rem;
     font-weight: 900;

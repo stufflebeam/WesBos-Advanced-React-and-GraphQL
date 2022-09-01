@@ -8,6 +8,7 @@ import CartStyles from './styles/CartStyles';
 import Supreme from './styles/Supreme';
 import { useUser } from './User';
 import { useCart } from '../lib/cartState';
+import Checkout from './Checkout';
 
 const CloseCartStyles = styled.span`
   font-size: 4rem;
@@ -48,6 +49,7 @@ export default function Cart() {
       </ul>
       <footer>
         <p>{formatMoney(calcTotalPrice(currentUser.cart))}</p>
+        <Checkout />
       </footer>
     </CartStyles>
   );
