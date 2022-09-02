@@ -105,6 +105,12 @@ export default async function checkout(
 
     // 6. Create the order and return it
 
+    // TODO: I noticed that in the backend Keystone UI, order items are able to be deleted from an oder.
+    //       I am not sure that that should be possible (in an ideal setup). It seems like an admin should
+    //       be able to delete items from a user's cart, but not from an order. The order list should be
+    //       immutable, as it is a historical record of what was purchased. I am not sure how to prevent
+    //       orders from being edited or deleted in the backend Keystone UI though. So, I need to research
+    //       that and try to come up with a plan.
     const order = await context.lists.Order.createOne({
         data: {
             // Pulling the amount off of the charge object to ensure that the amount lines up with what was
