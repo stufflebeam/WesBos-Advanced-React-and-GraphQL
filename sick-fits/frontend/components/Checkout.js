@@ -8,6 +8,8 @@ import {
 } from '@stripe/react-stripe-js';
 import { useState } from 'react';
 import nProgress from 'nprogress';
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/client';
 import SickButton from './styles/SickButton';
 import DisplayError from './ErrorMessage';
 
@@ -27,6 +29,20 @@ const CheckoutFormStyles = styled.form`
   }
 `;
 
+const CREATE_ORDER_MUTATION = gql`
+  mutation CREATE_ORDER_MUTATION($token: String!) {
+    checkout(token: $token) {
+      id
+      charge
+      total
+      items {
+        id
+        name
+      }
+    }
+  }
+`;
+
 const stripeLib = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
 
 function CheckoutForm() {
@@ -35,11 +51,17 @@ function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
 
+  // We don't have the token variable yet (at time of definition), so we can't pass it in here
+  // Instead, we'll pass it in when we call the function
+  const [checkout, { error: graphQLError }] = useMutation(
+    CREATE_ORDER_MUTATION
+  );
+
   async function handleSubmit(e) {
     // 1. Stop the form from submitting and turn the loader on
     e.preventDefault();
     setLoading(true);
-    console.log('We gotta do some work...');
+    // console.log('We gotta do some work...');
     // 2. Start the page transition
     nProgress.start();
     // 3. Create the payment method via Stripe (Token comes back here if successful)
@@ -61,6 +83,13 @@ function CheckoutForm() {
       return; // stops the checkout from happening
     }
     // 5. Send the token from step 3 to our Keystone server, via a custom mutation!
+    const order = await checkout({
+      variables: {
+        token: paymentMethod.id,
+      },
+    });
+    console.log('[Checkout] Finished with the order:', order);
+
     // 6. Change the page to view the order
     // 7. Close the cart (if the payment was successful)
     // 8. Turn the loader off
@@ -71,6 +100,7 @@ function CheckoutForm() {
   return (
     <CheckoutFormStyles onSubmit={handleSubmit}>
       {error && <DisplayError error={error} />}
+      {graphQLError && <DisplayError error={graphQLError} />}
       <CardElement />
       <SickButton>Check Out Now</SickButton>
     </CheckoutFormStyles>

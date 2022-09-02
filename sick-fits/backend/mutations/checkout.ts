@@ -88,6 +88,7 @@ export default async function checkout(
         throw new Error(err.message);
     });
 
+    console.log('[checkout] charge: ', charge);
     // 5. Convert the CartItems to OrderItems
     // 6. Create the order and return it
 }
