@@ -16,6 +16,11 @@ import { ordersPerPage } from '../config';
 //       both (and for any other pagination that we may need in the app in the future). This will
 //       require us to pass in the query and any variables as props to the component.
 
+// TODO: Refactor this so that the component simply uses the totalNumberOfOrders prop instead of
+//       making a separate query to get the total number of orders. I am already passing in that
+//       value as a prop from the orders page. So, it's just a matter of refactoring the component
+//       to use that value instead of making a separate query.
+
 export const ORDER_PAGINATION_QUERY = gql`
   query ORDER_PAGINATION_QUERY {
     _allOrdersMeta {
