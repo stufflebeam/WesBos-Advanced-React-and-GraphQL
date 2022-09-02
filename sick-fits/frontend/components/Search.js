@@ -58,7 +58,7 @@ export default function Search() {
     }
   );
 
-  console.log('[Search]', { data, loading, error });
+  // console.log('[Search]', { data, loading, error });
 
   const items = data?.searchTerms || [];
 
@@ -94,7 +94,7 @@ export default function Search() {
       //   console.log('[Search] res:', res);
     },
     onSelectedItemChange({ selectedItem }) {
-      console.log('selectedItem', selectedItem);
+      // console.log('selectedItem', selectedItem);
       router.push({
         pathname: `/product/${selectedItem?.id}`,
       });

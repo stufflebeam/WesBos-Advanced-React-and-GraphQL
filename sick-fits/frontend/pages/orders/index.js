@@ -1,6 +1,6 @@
 import { useRouter } from 'next/dist/client/router';
-import OrderPagination from '../components/OrderPagination';
-import Orders from '../components/Orders';
+import OrderPagination from '../../components/OrderPagination';
+import Orders from '../../components/Orders';
 
 export default function OrdersPage() {
   const { query } = useRouter();
