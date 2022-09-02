@@ -1,12 +1,12 @@
 import { list } from '@keystone-next/keystone/schema';
 import { integer, relationship, select, text } from '@keystone-next/fields';
 import { cloudinaryImage } from '@keystone-next/cloudinary';
-import { isSignedIn } from '../access';
+import { isSignedIn, permissions } from '../access';
 
 export const Product = list({
   access: {
     create: isSignedIn,
-    read: isSignedIn,
+    read: permissions.isSuperAdmin,
     update: isSignedIn,
     delete: isSignedIn,
   },
