@@ -15,6 +15,7 @@ import { extendGraphqlSchema } from './mutations';
 import { OrderItem } from './schemas/OrderItem';
 import { Order } from './schemas/Order';
 import { Role } from './schemas/Role';
+import { permissionsList } from './schemas/fields';
 
 const databaseURL =
   process.env.DATABASE_URL ||
@@ -100,7 +101,7 @@ export default withAuth(
     session: withItemData(statelessSessions(sessionConfig), {
       // This is a GraphQL query that will be run against each session to get the
       // user data.
-      User: 'id name email',
+      User: `id name email role {${permissionsList.join(' ')}}`,
     }),
   })
 );

@@ -1,10 +1,15 @@
 import { list } from '@keystone-next/keystone/schema';
 import { integer, relationship, select, text } from '@keystone-next/fields';
 import { cloudinaryImage } from '@keystone-next/cloudinary';
+import { isSignedIn } from '../access';
 
 export const Product = list({
-  // TODO add access
-  // access:
+  access: {
+    create: isSignedIn,
+    read: isSignedIn,
+    update: isSignedIn,
+    delete: isSignedIn,
+  },
   ui: {
     listView: {
       initialColumns: ['name', 'price', 'status'],
