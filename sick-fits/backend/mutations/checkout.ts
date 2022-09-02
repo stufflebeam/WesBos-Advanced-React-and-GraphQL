@@ -90,5 +90,41 @@ export default async function checkout(
 
     console.log('[checkout] charge: ', charge);
     // 5. Convert the CartItems to OrderItems
+
+    const orderItems = cartItems.map(cartItem => {
+        const orderItem = {
+            name: cartItem.product.name,
+            description: cartItem.product.description,
+            price: cartItem.product.price,
+            quantity: cartItem.quantity,
+            // TODO: Determine whether this is sufficient. What if the product photo is deleted? What if it changes?
+            photo: { connect: { id: cartItem.product.photo.id } },
+        }
+        return orderItem;
+    });
+
     // 6. Create the order and return it
+
+    const order = await context.lists.Order.createOne({
+        data: {
+            // Pulling the amount off of the charge object to ensure that the amount lines up with what was
+            // actually charged to the user's credit card. This is a good practice to follow, as the amount
+            // should, in theory, be the same as the amount variable, but, just in case something screwy 
+            // happens, it's better to be safe than sorry and make sure that our data matches Stripe's
+            // records (and the user's credit card statement) exactly.
+            total: charge.amount,
+            charge: charge.id,
+            items: { create: orderItems },
+            user: { connect: { id: userId } },
+        },
+        resolveFields: false,
+    });
+
+    // 7. Clean up any old cart items
+    const cartItemIds = cartItems.map(cartItem => cartItem.id);
+    await context.lists.CartItem.deleteMany({
+        ids: cartItemIds,
+    });
+
+    return order;
 }
