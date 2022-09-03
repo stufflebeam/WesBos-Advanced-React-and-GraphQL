@@ -1,5 +1,5 @@
 // At its simplest, the access control returns a 'yes' or a 'no' depending on the user's session data.
-
+/* eslint-disable */
 import { permissionsList } from './schemas/fields';
 import { ListAccessArgs } from './types';
 
@@ -12,7 +12,17 @@ const generatedPermissions = Object.fromEntries(
     permissionsList.map((permission) => [
         permission,
         function ({ session }: ListAccessArgs) {
-            return !!session?.data?.role?.[permission];
+            // console.log('[access] checking permission', permission);
+            // console.log('[access] session', session);
+            // console.dir(session, { depth: null });
+            // console.log('[access] session?.data.role', session?.data.role);
+            // console.log('[access] session?.data.role?.[permission]', session?.data.role?.[permission]);
+            // console.log('[access] !!session?.data.role?.[permission]', !!session?.data.role?.[permission]);
+            // console.log('[access] !!session?.data.role[permission]', !!session?.data.role[permission]);
+            // console.log('[access] !!session?.data.role?.canManageProducts', !!session?.data.role?.canManageProducts);
+            // console.log('[access] !!session?.data.role?.[0].canManageProducts', !!session?.data.role?.[0].canManageProducts);
+            // return !!session?.data.role?.[permission];
+            return !!session?.data.role?.[0]?.[permission];
         },
     ])
 );
@@ -30,4 +40,37 @@ export const permissions = {
     },
 };
 
-// TODO: Add rule-based functions
+// Rule-based functions (Logical functions that control list access)
+// Rules can return a boolean - yes or no - or a filter which limits which list items the user can CRUD.
+
+export const rules = {
+    canManageProducts({ session }: ListAccessArgs) {
+        // Are they signed in?
+        if (!isSignedIn({ session })) {
+            return false;
+        }
+        // 1. Do they have the 'manage products' permission?
+        // console.log(
+        //     '[access] permissions.canManageProducts({ session }): ',
+        //     permissions.canManageProducts({ session })
+        // );
+        if (permissions.canManageProducts({ session })) {
+            return true;
+        }
+        // 2. If not, do they own this item?
+        return { user: { id: session.itemId } };
+    },
+    canReadProducts({ session }: ListAccessArgs) {
+        // Are they signed in?
+        if (!isSignedIn({ session })) {
+            return false;
+        }
+        // 1. Do they have the 'manage products' permission?
+        if (permissions.canManageProducts({ session })) {
+            return true; // They can read everything!
+        }
+
+        // 2. Otherwise, they should only see 'Available' products (based on the 'status' field)
+        return { status: 'AVAILABLE' };
+    },
+};
