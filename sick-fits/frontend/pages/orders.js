@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 import { useQuery } from '@apollo/client';
 import OrderPagination from '../components/OrderPagination';
 import Orders from '../components/Orders';
+import PleaseSignIn from '../components/PleaseSignIn';
 
 export const ORDER_PAGINATION_QUERY = gql`
   query ORDER_PAGINATION_QUERY {
@@ -21,15 +22,17 @@ export default function OrdersPage() {
   const currentPage = parseInt(query.page) || 1;
   return (
     <div>
-      <OrderPagination
-        page={currentPage}
-        totalNumberOfOrders={totalNumberOfOrders}
-      />
-      <Orders page={currentPage} totalNumberOfOrders={totalNumberOfOrders} />
-      <OrderPagination
-        page={currentPage}
-        totalNumberOfOrders={totalNumberOfOrders}
-      />
+      <PleaseSignIn>
+        <OrderPagination
+          page={currentPage}
+          totalNumberOfOrders={totalNumberOfOrders}
+        />
+        <Orders page={currentPage} totalNumberOfOrders={totalNumberOfOrders} />
+        <OrderPagination
+          page={currentPage}
+          totalNumberOfOrders={totalNumberOfOrders}
+        />
+      </PleaseSignIn>
     </div>
   );
 }

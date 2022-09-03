@@ -36,9 +36,9 @@ export default function CreateProduct() {
   //     'https://res.cloudinary.com/stufflebeam/image/upload/v1661582104/placeholder/placeholder-images-product-2_large.webp';
 
   const { inputs, handleChange, resetForm, clearForm } = useForm({
-    name: 'Test Product',
-    description: 'This is a test product',
-    price: 929,
+    name: '',
+    description: '',
+    price: 0,
     image: '',
   });
 
