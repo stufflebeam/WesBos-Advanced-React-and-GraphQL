@@ -34,6 +34,12 @@ const placeholder =
 //       It might also be better to just return the first line of the description
 //       or add a 'short description' field or a 'subhead' field to the products table.
 
+// TODO: Conditionally render the Buy and Edit buttons, depending on whether or not
+//       the user is signed in and whether or not they have the correct permissions.
+
+// TODO: Conditionally render the products in the grid, depending on whether or not
+//       the products are available or not.
+
 // const Product = ({ product }) => (
 export default function Product({ product }) {
   return (
