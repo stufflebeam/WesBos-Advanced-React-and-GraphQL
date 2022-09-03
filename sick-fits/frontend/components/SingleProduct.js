@@ -51,7 +51,7 @@ export default function SingleProduct({ id }) {
   if (error) return <DisplayError error={error} />;
   const { name, price, description, photo } = data.Product;
   return (
-    <ProductStyles>
+    <ProductStyles data-testid="singleProduct">
       <Head>
         <title>Sick Fits | {name}</title>
       </Head>
