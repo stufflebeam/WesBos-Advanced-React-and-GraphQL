@@ -26,7 +26,7 @@ export const ProductImage = list({
     read: () => true,
     update: permissions.canManageProducts,
     delete: permissions.canManageProducts,
-  }
+  },
   fields: {
     image: cloudinaryImage({
       cloudinary,
