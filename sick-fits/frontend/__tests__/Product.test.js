@@ -41,4 +41,23 @@ describe('<Product/>', () => {
     //       like those created by styled-components.
     expect(container).toMatchSnapshot();
   });
+
+  it('renders the image properly', () => {
+    const { container, debug } = render(
+      <CartStateProvider>
+        <MockedProvider>
+          <Product product={product} />
+        </MockedProvider>
+      </CartStateProvider>
+    );
+    // grab the image
+    const img = screen.getByAltText(product.photo.altText);
+    debug(img);
+    expect(img).toBeInTheDocument();
+    // make sure it's the right one
+    expect(img).toHaveAttribute(
+      'src',
+      product.photo.image.publicUrlTransformed
+    );
+  });
 });
