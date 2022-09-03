@@ -27,4 +27,18 @@ describe('<Product/>', () => {
     expect(link).toHaveAttribute('href', `/product/${product.id}`);
     expect(link).toHaveTextContent(product.name);
   });
+
+  it('renders and matches the snapshot', () => {
+    const { container, debug } = render(
+      <CartStateProvider>
+        <MockedProvider>
+          <Product product={product} />
+        </MockedProvider>
+      </CartStateProvider>
+    );
+
+    // TODO: Determine how snapshot testing works with dynamically-generated classes
+    //       like those created by styled-components.
+    expect(container).toMatchSnapshot();
+  });
 });
