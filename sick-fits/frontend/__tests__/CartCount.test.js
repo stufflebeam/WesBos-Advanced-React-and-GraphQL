@@ -1,9 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import { MockedProvider } from '@apollo/react-testing';
 import wait from 'waait';
 import CartCount from '../components/CartCount';
-import { CartStateProvider } from '../lib/cartState';
-import { fakeItem } from '../lib/testUtils';
 
 describe('<CartCount />', () => {
   it('renders', () => {
