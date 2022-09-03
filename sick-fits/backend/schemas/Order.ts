@@ -8,6 +8,7 @@ import {
 } from '@keystone-next/fields';
 import { cloudinaryImage } from '@keystone-next/cloudinary';
 import formatMoney from '../lib/formatMoney';
+import { isSignedIn, rules } from '../access';
 
 export const Order = list({
   // TODO: Figure out why this label declaration is not working. Althought it does not appear to be
@@ -18,6 +19,12 @@ export const Order = list({
   //     return `Order ${item.name} - ${formatMoney(item.price * item.quantity)}`;
   //   },
   // }),
+  access: {
+    create: isSignedIn,
+    read: rules.canOrder,
+    update: () => false,
+    delete: () => false,
+  },
   ui: {
     listView: {
       initialColumns: ['user', 'total', 'items', 'charge'],

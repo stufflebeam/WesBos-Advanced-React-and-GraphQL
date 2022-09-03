@@ -60,6 +60,38 @@ export const rules = {
         // 2. If not, do they own this item?
         return { user: { id: session.itemId } };
     },
+    canOrder({ session }: ListAccessArgs) {
+        // Are they signed in?
+        if (!isSignedIn({ session })) {
+            return false;
+        }
+        // 1. Do they have the 'manage products' permission?
+        // console.log(
+        //     '[access] permissions.canManageProducts({ session }): ',
+        //     permissions.canManageProducts({ session })
+        // );
+        if (permissions.canManageCart({ session })) {
+            return true;
+        }
+        // 2. If not, do they own this item?
+        return { user: { id: session.itemId } };
+    },
+    canManageOrderItems({ session }: ListAccessArgs) {
+        // Are they signed in?
+        if (!isSignedIn({ session })) {
+            return false;
+        }
+        // 1. Do they have the 'manage products' permission?
+        // console.log(
+        //     '[access] permissions.canManageProducts({ session }): ',
+        //     permissions.canManageProducts({ session })
+        // );
+        if (permissions.canManageCart({ session })) {
+            return true;
+        }
+        // 2. If not, do they own this item? (check the user on the order that holds the item)
+        return { order: { user: { id: session.itemId } } };
+    },
     canReadProducts({ session }: ListAccessArgs) {
         // Are they signed in?
         if (!isSignedIn({ session })) {

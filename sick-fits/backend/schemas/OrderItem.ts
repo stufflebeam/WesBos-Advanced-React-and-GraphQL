@@ -1,8 +1,15 @@
 import { list } from '@keystone-next/keystone/schema';
 import { integer, relationship, select, text } from '@keystone-next/fields';
 import { cloudinaryImage } from '@keystone-next/cloudinary';
+import { isSignedIn, rules } from '../access';
 
 export const OrderItem = list({
+  access: {
+    create: isSignedIn,
+    read: rules.canManageOrderItems,
+    update: () => false,
+    delete: () => false,
+  },
   ui: {
     listView: {
       initialColumns: ['name', 'price', 'quantity', 'order'],
