@@ -12,7 +12,7 @@ const AccountCreatedNotificationStyles = styled.p`
   justify-content: center;
 `;
 
-const SIGNUP_MUTATION = gql`
+export const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION(
     $email: String!
     $name: String!
@@ -49,8 +49,8 @@ export default function SignUp() {
     // console.log('[SignUp] handleSubmit() inputs:', inputs);
     // Send the email and password to the GraphQL API
     const res = await signUp().catch(console.error);
-    console.log('[SignUp] handleSubmit() res:', res);
-    console.log('[SignUp] handleSubmit()', { data, loading, error });
+    // console.log('[SignUp] handleSubmit() res:', res);
+    // console.log('[SignUp] handleSubmit()', { data, loading, error });
     resetForm();
   }
 
