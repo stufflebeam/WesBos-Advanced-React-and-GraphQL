@@ -21,7 +21,7 @@ describe('<Product/>', () => {
     // debug(priceTag);
     expect(priceTag).toBeInTheDocument();
     const link = container.querySelector('a');
-    debug(link);
+    // debug(link);
     // These values can be explicitly set here or be pulled in dynamically from the mock data
     expect(link).toHaveAttribute('href', '/product/abc123');
     expect(link).toHaveAttribute('href', `/product/${product.id}`);
@@ -52,7 +52,7 @@ describe('<Product/>', () => {
     );
     // grab the image
     const img = screen.getByAltText(product.photo.altText);
-    debug(img);
+    // debug(img);
     expect(img).toBeInTheDocument();
     // make sure it's the right one
     expect(img).toHaveAttribute(
