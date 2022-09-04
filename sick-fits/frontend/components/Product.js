@@ -43,7 +43,7 @@ const placeholder =
 // const Product = ({ product }) => (
 export default function Product({ product }) {
   return (
-    <ItemStyles key={product.id}>
+    <ItemStyles key={product.id} data-testid="product-component">
       <img
         src={product?.photo?.image?.publicUrlTransformed || placeholder}
         alt={product?.photo?.altText || product?.name}

@@ -1,0 +1,125 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CreateProduct /> handles the updating of form elements 1`] = `
+<div>
+  <form
+    class="Form-sc-1xszr8q-0 hVEEdl"
+  >
+    <fieldset
+      aria-busy="false"
+    >
+      <label
+        for="image"
+      >
+        Image:
+        <input
+          name="image"
+          required=""
+          type="file"
+        />
+      </label>
+      <label
+        for="name"
+      >
+        Name:
+        <input
+          name="name"
+          placeholder="Name"
+          type="text"
+          value="dogs are best"
+        />
+      </label>
+      <label
+        for="description"
+      >
+        Description:
+        <textarea
+          id="description"
+          name="description"
+          placeholder="Description"
+        >
+          dogs
+        </textarea>
+      </label>
+      <label
+        for="price"
+      >
+        Price:
+        <input
+          data-testid="create-product-price"
+          name="price"
+          placeholder="Price"
+          type="number"
+          value="0"
+        />
+      </label>
+      <button
+        type="submit"
+      >
+        + Add Product
+      </button>
+    </fieldset>
+  </form>
+</div>
+`;
+
+exports[`<CreateProduct /> renders and matches snapshot 1`] = `
+<div>
+  <form
+    class="Form-sc-1xszr8q-0 hVEEdl"
+  >
+    <fieldset
+      aria-busy="false"
+    >
+      <label
+        for="image"
+      >
+        Image:
+        <input
+          name="image"
+          required=""
+          type="file"
+        />
+      </label>
+      <label
+        for="name"
+      >
+        Name:
+        <input
+          name="name"
+          placeholder="Name"
+          type="text"
+          value=""
+        />
+      </label>
+      <label
+        for="description"
+      >
+        Description:
+        <textarea
+          id="description"
+          name="description"
+          placeholder="Description"
+        />
+      </label>
+      <label
+        for="price"
+      >
+        Price:
+        <input
+          data-testid="create-product-price"
+          name="price"
+          placeholder="Price"
+          type="number"
+          value="0"
+        />
+      </label>
+      <button
+        type="submit"
+      >
+        + Add Product
+      </button>
+    </fieldset>
+  </form>
+</div>
+`;

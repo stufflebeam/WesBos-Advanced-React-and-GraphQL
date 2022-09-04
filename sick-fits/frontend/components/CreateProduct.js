@@ -6,7 +6,7 @@ import Form from './styles/Form';
 import DisplayError from './ErrorMessage';
 import { ALL_PRODUCTS_QUERY } from './Products';
 
-const CREATE_PRODUCT_MUTATION = gql`
+export const CREATE_PRODUCT_MUTATION = gql`
   mutation CREATE_PRODUCT_MUTATION(
     # which variables we want to pass to the mutation
     $name: String!
@@ -110,6 +110,7 @@ export default function CreateProduct() {
         <label htmlFor="price">
           Price:
           <input
+            data-testid="create-product-price"
             type="number"
             name="price"
             placeholder="Price"

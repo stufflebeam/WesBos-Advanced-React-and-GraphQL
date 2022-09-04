@@ -4,6 +4,7 @@ exports[`<Product/> renders and matches the snapshot 1`] = `
 <div>
   <div
     class="ItemStyles-sc-16pk14u-0 ifLwZc"
+    data-testid="product-component"
   >
     <img
       alt="dogs are best"
