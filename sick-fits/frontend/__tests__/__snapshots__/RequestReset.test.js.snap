@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RequestReset /> calls the mutation when submitted 1`] = `
+<div>
+  <p
+    class="RequestReset__ResetRequestedNotificationStyles-sc-j2xoq9-0 gdnKmY"
+  >
+    Success! 
+    <br />
+     
+    <br />
+    Check your email for a reset link.
+    <br />
+     
+    <br />
+    If an account was located for the provided email address, a password reset link has been sent.
+  </p>
+</div>
+`;
+
+exports[`<RequestReset /> renders and matches the snapshot 1`] = `
+<div>
+  <form
+    class="Form-sc-1xszr8q-0 hVEEdl"
+    method="POST"
+  >
+    <h2>
+      Reset Your Password
+    </h2>
+    <fieldset>
+      <label
+        for="email"
+      >
+        Email
+        <input
+          autocomplete="email"
+          id="email"
+          name="email"
+          placeholder="Your email address"
+          type="email"
+          value=""
+        />
+      </label>
+      <button
+        type="submit"
+      >
+        Reset Password
+      </button>
+    </fieldset>
+  </form>
+</div>
+`;
